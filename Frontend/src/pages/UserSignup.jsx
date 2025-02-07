@@ -19,7 +19,6 @@ const UserSignup = () => {
                 email: email,
                 password: password
             })
-            console.log(userData);
             //reset 
             setEmail('');
             setPassword('');

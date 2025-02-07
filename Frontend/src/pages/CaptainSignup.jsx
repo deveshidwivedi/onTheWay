@@ -20,7 +20,7 @@ const CaptainSignup = () => {
                 email: email,
                 password: password
             })
-            console.log(captainData);
+        
             //reset 
             setEmail('');
             setPassword('');

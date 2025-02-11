@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Start from './pages/Start';
 import UserLogin from './pages/UserLogin';
+import UserLogout from './pages/UserLogout';
 import UserSignup from './pages/UserSignup';
 import CaptainLogin from './pages/Captainlogin';
 import CaptainSignup from './pages/Captainsignup';
@@ -23,6 +24,9 @@ const App = () => {
             <Home />
           </UserProtectWrapper>
         } />
+        <Route path='/users/logout' element={<UserProtectWrapper>
+          <UserLogout />
+        </UserProtectWrapper>} />
       </Routes>
     </div>
   )

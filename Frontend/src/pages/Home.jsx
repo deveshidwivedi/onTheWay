@@ -1,9 +1,72 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import logo from "../assets/logo.png";
+import bg22 from "../assets/bg22.jpg";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const Home = () => {
+    const [pickup, setPickup] = useState('');
+    const [destination, setDestination] = useState('');
+    const [panelOpen, setPanelOpen] = useState(false);
+    const panelRef = useRef(null);
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+    }
+
+    useGSAP(function () {
+        if (panelOpen) {
+            gsap.to(panelRef.current, {
+                height: '70%',
+            });
+        } else {
+            gsap.to(panelRef.current, {
+                height: '0%',
+            });
+        }
+
+    }, [panelOpen]);
+
     return (
-        <div>Home</div>
-    )
-}
+        <div className="min-h-screen w-full bg-cover bg-no-repeat bg-center flex flex-col items-center"
+            style={{ backgroundImage: `url(${bg22})` }}>
+            <img className="w-35 ml-4 -mt-8 self-start" src={logo} alt="Logo" />
+
+            <div className=' flex flex-col justify-end h-screen absolute top-0 w-full'>
+                <div className='h-[30%] p-5 bg-white'>
+                    <h4 className='text-2xl font-semibold'>Find a Trip</h4>
+                    <form onSubmit={(e) => {
+                        submitHandler(e);
+                    }}>
+                        <div className='line absolute h-16 w-1 top-[82%] left-10 bg-gray-700 rounded-full'></div>
+                        <input
+                            onClick={() => {
+                                setPanelOpen(true);
+                            }}
+                            value={pickup}
+                            onChange={(e) => setPickup(e.target.value)}
+                            className='bg-[#eeeeee] px-12 py-2 text-base rounded-lg w-full mt-3'
+                            type="text"
+                            placeholder="Add pick-up location"
+                        />
+                        <input
+                            onClick={() => {
+                                setPanelOpen(true);
+                            }}
+                            value={destination}
+                            onChange={(e) => setDestination(e.target.value)}
+                            className='bg-[#eeeeee] px-12 py-2 text-base rounded-lg w-full mt-3'
+                            type="text"
+                            placeholder="Enter your destination"
+                        />
+                    </form>
+                </div>
+                <div ref={panelRef} className='h-0 bg-red-500 '>
+
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default Home;

@@ -26,6 +26,7 @@ const UserLogin = () => {
         if (response.status === 200) {
             const data = await response.json();
             setUser(data);
+            localStorage.setItem('token', data.token);
             navigate('/home');
         } else {
             console.error("Login failed");

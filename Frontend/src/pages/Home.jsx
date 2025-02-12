@@ -86,7 +86,7 @@ const Home = () => {
                     <LocationSearchPanel />
                 </div>
             </div>
-            <div className='fixed w-full z-10 bottom-0 bg-white px-3 py-6'>
+            <div className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6'>
                 <h3 className='text-xl font-semibold mb-5'>Choose your ride</h3>
                 <div className="flex bg-gray-100 rounded-xl w-full p-3 items-center justify-between mb-2 active:border-2 active:border-black">
                     <img className='h-20' src={car} alt='car' />
@@ -115,6 +115,7 @@ const Home = () => {
                     </div>
                     <h2 className=' text-xl font-semibold'> ₹156.2</h2>
                 </div>
+                4 55
             </div>
         </div>
     );

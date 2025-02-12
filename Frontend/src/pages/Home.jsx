@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import logo from "../assets/logo.png";
 import bg22 from "../assets/bg22.jpg";
 import { useGSAP } from "@gsap/react";
+import 'remixicon/fonts/remixicon.css'
 import gsap from "gsap";
 
 const Home = () => {
@@ -9,23 +10,34 @@ const Home = () => {
     const [destination, setDestination] = useState('');
     const [panelOpen, setPanelOpen] = useState(false);
     const panelRef = useRef(null);
+    const panelCloseRef = useRef(null);
 
     const submitHandler = (e) => {
         e.preventDefault();
     }
 
+
     useGSAP(function () {
         if (panelOpen) {
             gsap.to(panelRef.current, {
                 height: '70%',
-            });
+                padding: 24
+                // opacity:1
+            })
+            gsap.to(panelCloseRef.current, {
+                opacity: 1
+            })
         } else {
             gsap.to(panelRef.current, {
                 height: '0%',
-            });
+                padding: 0
+                // opacity:0
+            })
+            gsap.to(panelCloseRef.current, {
+                opacity: 0
+            })
         }
-
-    }, [panelOpen]);
+    }, [panelOpen])
 
     return (
         <div className="min-h-screen w-full bg-cover bg-no-repeat bg-center flex flex-col items-center"
@@ -33,12 +45,19 @@ const Home = () => {
             <img className="w-35 ml-4 -mt-8 self-start" src={logo} alt="Logo" />
 
             <div className=' flex flex-col justify-end h-screen absolute top-0 w-full'>
-                <div className='h-[30%] p-5 bg-white'>
+                <div className='h-[30%] p-6 bg-white relative'>
+                    <div className='line absolute h-16 w-1 top-[55%] left-10 bg-gray-700 rounded-full transform -translate-y-1/2'></div>
+
+                    <h5 ref={panelCloseRef} onClick={() => {
+                        setPanelOpen(false)
+                    }} className='absolute opacity-0 right-6 top-6 text-2xl'>
+                        <i className="ri-arrow-down-wide-line"></i>
+                    </h5>
                     <h4 className='text-2xl font-semibold'>Find a Trip</h4>
                     <form onSubmit={(e) => {
                         submitHandler(e);
                     }}>
-                        <div className='line absolute h-16 w-1 top-[82%] left-10 bg-gray-700 rounded-full'></div>
+
                         <input
                             onClick={() => {
                                 setPanelOpen(true);

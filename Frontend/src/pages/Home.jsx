@@ -9,6 +9,7 @@ import car from '../assets/car.png';
 import bike from '../assets/bike.png';
 import auto from '../assets/auto.png';
 import VehiclePanel from '../components/VehiclePanel';
+import ConfirmRide from '../components/ConfirmRide';
 
 const Home = () => {
     const [pickup, setPickup] = useState('');
@@ -17,7 +18,9 @@ const Home = () => {
     const vehiclePanelRef = useRef(null);
     const panelRef = useRef(null);
     const panelCloseRef = useRef(null);
+    const confirmRidePanelRef = useRef(null);
     const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false);
+    const [confirmRidePanel, setConfirmRidePanel] = useState(false);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -55,6 +58,18 @@ const Home = () => {
             })
         }
     }, [vehiclePanelOpen])
+
+    useGSAP(function () {
+        if (confirmRidePanel) {
+            gsap.to(confirmRidePanelRef.current, {
+                transform: 'translateY(0)'
+            })
+        } else {
+            gsap.to(confirmRidePanelRef.current, {
+                transform: 'translateY(100%)'
+            })
+        }
+    }, [confirmRidePanel])
 
     return (
         <div className="min-h-screen w-full bg-cover bg-no-repeat bg-center flex flex-col items-center  overflow-hidden"
@@ -103,7 +118,10 @@ const Home = () => {
                 </div>
             </div>
             <div ref={vehiclePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-14'>
-                <VehiclePanel setVehiclePanelOpen={setVehiclePanelOpen} />
+                <VehiclePanel setConfirmRidePanel={setConfirmRidePanel} setVehiclePanelOpen={setVehiclePanelOpen} />
+            </div>
+            <div ref={confirmRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-14'>
+                <ConfirmRide />
             </div>
         </div>
     );

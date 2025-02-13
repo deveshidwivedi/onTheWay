@@ -13,8 +13,10 @@ const Home = () => {
     const [pickup, setPickup] = useState('');
     const [destination, setDestination] = useState('');
     const [panelOpen, setPanelOpen] = useState(false);
+    const vehiclePanelRef = useRef(null);
     const panelRef = useRef(null);
     const panelCloseRef = useRef(null);
+    const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -41,12 +43,25 @@ const Home = () => {
         }
     }, [panelOpen])
 
+    useGSAP(function () {
+        if (vehiclePanelOpen) {
+            gsap.to(vehiclePanelRef.current, {
+                transform: 'translateY(0)'
+            })
+        } else {
+            gsap.to(vehiclePanelRef.current, {
+                transform: 'translateY(100%)'
+            })
+        }
+    }, [vehiclePanelOpen])
+
     return (
         <div className="min-h-screen w-full bg-cover bg-no-repeat bg-center flex flex-col items-center  overflow-hidden"
             style={{ backgroundImage: `url(${bg22})` }}>
             <img className="w-35 ml-4 -mt-8 self-start" src={logo} alt="Logo" />
 
-            <div className=' flex flex-col justify-end h-screen absolute top-0 w-full'>
+            <div
+                className=' flex flex-col justify-end h-screen absolute top-0 w-full'>
                 <div className='h-[30%] p-6 bg-white relative'>
                     <div className='line absolute h-16 w-1 top-[55%] left-10 bg-gray-700 rounded-full transform -translate-y-1/2'></div>
 
@@ -83,10 +98,15 @@ const Home = () => {
                     </form>
                 </div>
                 <div ref={panelRef} className='bg-white '>
-                    <LocationSearchPanel />
+                    <LocationSearchPanel setPanelOpen={setPanelOpen} setVehiclePanel={setVehiclePanelOpen} />
                 </div>
             </div>
-            <div className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6'>
+            <div ref={vehiclePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-14'>
+                <h5 className='p-1 text-center w-[93%] absolute top-0  '
+                    onClick={() => {
+                        setVehiclePanelOpen(false);
+                    }}
+                ><i className='text-3xl text-gray-200 ri-arrow-down-wide-line'></i></h5>
                 <h3 className='text-xl font-semibold mb-5'>Choose your ride</h3>
                 <div className="flex bg-gray-100 rounded-xl w-full p-3 items-center justify-between mb-2 active:border-2 active:border-black">
                     <img className='h-20' src={car} alt='car' />
@@ -115,7 +135,7 @@ const Home = () => {
                     </div>
                     <h2 className=' text-xl font-semibold'> ₹156.2</h2>
                 </div>
-                4 55
+
             </div>
         </div>
     );

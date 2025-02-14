@@ -11,6 +11,7 @@ import auto from '../assets/auto.png';
 import VehiclePanel from '../components/VehiclePanel';
 import ConfirmRide from '../components/ConfirmRide';
 import LookingForDriver from '../components/LookingForDriver';
+import WaitForDriver from '../components/WaitForDriver';
 
 const Home = () => {
     const [pickup, setPickup] = useState('');
@@ -140,7 +141,10 @@ const Home = () => {
                 <ConfirmRide setConfirmRidePanel={setConfirmRidePanel} setVehicleFound={setVehicleFound} />
             </div>
             <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-14'>
-                <LookingForDriver />
+                <LookingForDriver setVehicleFound={setVehicleFound} />
+            </div>
+            <div className='fixed w-full z-10 bottom-0  bg-white px-3 py-10 pt-14'>
+                <WaitForDriver setVehicleFound={setVehicleFound} />
             </div>
         </div>
     );

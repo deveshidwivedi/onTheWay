@@ -10,6 +10,7 @@ import bike from '../assets/bike.png';
 import auto from '../assets/auto.png';
 import VehiclePanel from '../components/VehiclePanel';
 import ConfirmRide from '../components/ConfirmRide';
+import LookingForDriver from '../components/LookingForDriver';
 
 const Home = () => {
     const [pickup, setPickup] = useState('');
@@ -19,8 +20,10 @@ const Home = () => {
     const panelRef = useRef(null);
     const panelCloseRef = useRef(null);
     const confirmRidePanelRef = useRef(null);
+    const vehicleFoundRef = useRef(null);
     const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false);
     const [confirmRidePanel, setConfirmRidePanel] = useState(false);
+    const [vehicleFound, setVehicleFound] = useState(false);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -70,6 +73,19 @@ const Home = () => {
             })
         }
     }, [confirmRidePanel])
+
+
+    useGSAP(function () {
+        if (vehicleFound) {
+            gsap.to(vehicleFoundRef.current, {
+                transform: 'translateY(0)'
+            })
+        } else {
+            gsap.to(vehicleFoundRef.current, {
+                transform: 'translateY(100%)'
+            })
+        }
+    }, [vehicleFound])
 
     return (
         <div className="min-h-screen w-full bg-cover bg-no-repeat bg-center flex flex-col items-center  overflow-hidden"
@@ -121,7 +137,10 @@ const Home = () => {
                 <VehiclePanel setConfirmRidePanel={setConfirmRidePanel} setVehiclePanelOpen={setVehiclePanelOpen} />
             </div>
             <div ref={confirmRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-14'>
-                <ConfirmRide setVehiclePanelOpen={setVehiclePanelOpen} />
+                <ConfirmRide setConfirmRidePanel={setConfirmRidePanel} setVehicleFound={setVehicleFound} />
+            </div>
+            <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-14'>
+                <LookingForDriver />
             </div>
         </div>
     );

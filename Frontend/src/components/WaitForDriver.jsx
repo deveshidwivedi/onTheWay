@@ -12,7 +12,7 @@ const WaitForDriver = (props) => {
             <div className="flex items-center justify-between">
                 <img
                     className="h-23"
-                    src={car} alt="icar" />
+                    src={car} alt="car" />
                 <div className="text-right">
                     <h2 className="text-lg font-medium">Mr. Sanjay</h2>
                     <h4 className="text-xl font-semibold">MH 09 JK 9090</h4>

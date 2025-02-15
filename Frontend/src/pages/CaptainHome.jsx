@@ -10,7 +10,7 @@ const CaptainHome = () => {
         <div className="h-screen ">
             <div className='fixed p-2 top-0 flex items-center justify-between w-screen '>
                 <img className="w-35  -mt-12 self-start -mb-25" src={logo} alt="Logo" />
-                <Link to='/home'
+                <Link to='/captain-home'
                     className=" h-10 w-10  bg-white flex items-center justify-center rounded-full">
                     <i className="text-lg font-medium ri-logout-box-r-line"></i>
                 </Link>
@@ -25,7 +25,7 @@ const CaptainHome = () => {
             </div>
 
             <div className="h-2/5 p-4">
-                <div className='flex p-3 bg-gray-100 rounded-full items-center justify-between '>
+                <div className='flex p-3  rounded-full items-center justify-between '>
                     <div className='flex items-center justify-start gap-3 '>
                         <img className='h-16 w-16  rounded-full object-cover' src={driver} alt='driver' />
                         <h4 className='text-lg font-medium'>Sanjay Patil</h4>
@@ -39,7 +39,7 @@ const CaptainHome = () => {
                         </p>
                     </div>
                 </div>
-                <div className='flex justify-center gap-5 items-start'>
+                <div className='flex justify-center gap-5 rounded-xl p-4 items-start bg-gray-100'>
                     <div className='text-center'>
                         <i className='text-2xl font-thin ri-timer-2-line'></i>
                         <h5 className='text-lg font-medium'>10.2</h5>

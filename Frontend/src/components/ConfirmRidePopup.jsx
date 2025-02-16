@@ -1,6 +1,6 @@
 import React from "react";
 
-const ConfirmRidePopupPanel = () => {
+const ConfirmRidePopup = () => {
     return (
         <div>
             new new
@@ -8,4 +8,4 @@ const ConfirmRidePopupPanel = () => {
     )
 }
 
-export default ConfirmRidePopupPanel;
+export default ConfirmRidePopup;

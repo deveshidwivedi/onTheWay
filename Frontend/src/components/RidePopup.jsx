@@ -1,14 +1,14 @@
 import React from 'react';
 import customer from '../assets/customer.jpg';
 
-const RidePopUp = ({ setVehiclePanelOpen }) => {
+const RidePopUp = (props) => {
     return (
         <div className="bg-white fixed bottom-0 left-0 right-0 shadow-lg p-3 rounded-t-lg">
             {/* Close Arrow */}
             <div className="flex justify-center">
                 <i
                     className="text-2xl text-gray-600 ri-arrow-down-wide-line cursor-pointer"
-                    onClick={() => setVehiclePanelOpen(false)}
+                    onClick={() => props.setRidePopupPanel(false)}
                 ></i>
             </div>
 
@@ -41,7 +41,9 @@ const RidePopUp = ({ setVehiclePanelOpen }) => {
 
             {/* Buttons */}
             <div className="flex gap-2 mt-3">
-                <button className="flex-1 bg-green-700 text-white text-sm font-semibold rounded-md py-2 hover:bg-green-800">
+                <button
+                    onClick={() => props.setRidePopupPanel(false)}
+                    className="flex-1 bg-green-700 text-white text-sm font-semibold rounded-md py-2 hover:bg-green-800">
                     Accept
                 </button>
                 <button className="flex-1 bg-gray-300 text-gray-700 text-sm font-semibold rounded-md py-2 hover:bg-gray-400">

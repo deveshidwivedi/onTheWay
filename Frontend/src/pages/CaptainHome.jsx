@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
 import bg2 from "../assets/bg2.jpg";
 import car from "../assets/car.png";
@@ -6,8 +6,26 @@ import logo from "../assets/logo.png";
 import driver from "../assets/driver.jpg";
 import CaptainDetails from '../components/CaptainDetails';
 import RidePopup from '../components/RidePopup';
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const CaptainHome = () => {
+
+    const [ridePopupPanel, setRidePopupPanel] = useState(true);
+    const ridePopupPanelRef = useRef(null);
+
+    useGSAP(() => {
+        if (ridePopupPanel) {
+            gsap.to(ridePopupPanelRef.current, { y: 0, duration: 0.3 });
+        } else {
+            gsap.to(ridePopupPanelRef.current, {
+                y: "100vh",
+                duration: 1.2,
+                onComplete: () => setRidePopupPanel(null)
+            });
+        }
+    }, [ridePopupPanel]);
+
     return (
         <div className="h-screen ">
             <div className='fixed p-2 top-0 flex items-center justify-between w-screen '>
@@ -30,8 +48,8 @@ const CaptainHome = () => {
                 <CaptainDetails />
             </div>
 
-            <div className="fixed w-full z-10 bottom-0 px-3 py-10 pt-12">
-                <RidePopup />
+            <div ref={ridePopupPanelRef} className="fixed w-full z-10 translate-y-full bottom-0 px-3 py-10 pt-12">
+                <RidePopup setRidePopupPanel={setRidePopupPanel} />
             </div>
         </div >
     )

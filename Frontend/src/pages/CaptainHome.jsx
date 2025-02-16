@@ -14,7 +14,7 @@ const CaptainHome = () => {
 
     const [ridePopupPanel, setRidePopupPanel] = useState(true);
     const ridePopupPanelRef = useRef(null);
-    const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(true);
+    const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(false);
     const confirmRidePopupPanelRef = useRef(null);
 
     useGSAP(() => {
@@ -28,6 +28,18 @@ const CaptainHome = () => {
             });
         }
     }, [ridePopupPanel]);
+
+    useGSAP(() => {
+        if (confirmRidePopupPanel) {
+            gsap.to(confirmRidePopupPanelRef.current, { y: 0, duration: 0.3 });
+        } else {
+            gsap.to(confirmRidePopupPanelRef.current, {
+                y: "100vh",
+                duration: 1.2,
+                onComplete: () => setConfirmRidePopupPanel(null)
+            });
+        }
+    }, [confirmRidePopupPanel]);
 
     return (
         <div className="h-screen ">
@@ -52,11 +64,15 @@ const CaptainHome = () => {
             </div>
 
             <div ref={ridePopupPanelRef} className="fixed w-full z-10 translate-y-full bottom-0 px-3 py-10 pt-12">
-                <RidePopup setRidePopupPanel={setRidePopupPanel} />
+                <RidePopup setRidePopupPanel={setRidePopupPanel}
+                    setConfirmRidePopupPanel={setConfirmRidePopupPanel}
+                />
             </div>
 
             <div ref={confirmRidePopupPanelRef} className="fixed w-full z-10 translate-y-full bottom-0 px-3 py-10 pt-12">
-                <ConfirmRidePopup setConfirmRidePopupPanel={setConfirmRidePopupPanel} />
+                <ConfirmRidePopup setRidePopupPanel={setRidePopupPanel} setConfirmRidePopupPanel={setConfirmRidePopupPanel}
+
+                />
             </div>
         </div >
     )

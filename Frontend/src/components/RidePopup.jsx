@@ -42,6 +42,7 @@ const RidePopUp = (props) => {
             {/* Buttons */}
             <div className="flex gap-2 mt-3">
                 <button
+                    onClick={() => props.setConfirmRidePopupPanel(true)}
                     className="flex-1 bg-green-700 text-white text-sm font-semibold rounded-md py-2 hover:bg-green-800">
                     Accept
                 </button>

@@ -42,11 +42,12 @@ const RidePopUp = (props) => {
             {/* Buttons */}
             <div className="flex gap-2 mt-3">
                 <button
-                    onClick={() => props.setRidePopupPanel(false)}
                     className="flex-1 bg-green-700 text-white text-sm font-semibold rounded-md py-2 hover:bg-green-800">
                     Accept
                 </button>
-                <button className="flex-1 bg-gray-300 text-gray-700 text-sm font-semibold rounded-md py-2 hover:bg-gray-400">
+                <button
+                    onClick={() => props.setRidePopupPanel(false)}
+                    className="flex-1 bg-gray-300 text-gray-700 text-sm font-semibold rounded-md py-2 hover:bg-gray-400">
                     Ignore
                 </button>
             </div>

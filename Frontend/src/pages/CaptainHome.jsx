@@ -8,11 +8,14 @@ import CaptainDetails from '../components/CaptainDetails';
 import RidePopup from '../components/RidePopup';
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import ConfirmRidePopup from "../components/ConfirmRidePopup";
 
 const CaptainHome = () => {
 
     const [ridePopupPanel, setRidePopupPanel] = useState(true);
     const ridePopupPanelRef = useRef(null);
+    const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(true);
+    const confirmRidePopupPanelRef = useRef(null);
 
     useGSAP(() => {
         if (ridePopupPanel) {
@@ -50,6 +53,10 @@ const CaptainHome = () => {
 
             <div ref={ridePopupPanelRef} className="fixed w-full z-10 translate-y-full bottom-0 px-3 py-10 pt-12">
                 <RidePopup setRidePopupPanel={setRidePopupPanel} />
+            </div>
+
+            <div ref={confirmRidePopupPanelRef} className="fixed w-full z-10 translate-y-full bottom-0 px-3 py-10 pt-12">
+                <ConfirmRidePopup setConfirmRidePopupPanel={setConfirmRidePopupPanel} />
             </div>
         </div >
     )

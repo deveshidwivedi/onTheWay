@@ -5,6 +5,7 @@ import car from "../assets/car.png";
 import logo from "../assets/logo.png";
 import driver from "../assets/driver.jpg";
 import CaptainDetails from '../components/CaptainDetails';
+import RidePopup from '../components/RidePopup';
 
 const CaptainHome = () => {
     return (
@@ -27,7 +28,10 @@ const CaptainHome = () => {
 
             <div className="h-2/5 p-4">
                 <CaptainDetails />
+            </div>
 
+            <div className="fixed w-full z-10 bottom-0 px-3 py-10 pt-12">
+                <RidePopup />
             </div>
         </div >
     )

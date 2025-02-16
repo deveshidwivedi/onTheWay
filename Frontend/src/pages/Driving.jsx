@@ -54,7 +54,7 @@ const Driving = () => {
                     </div>
 
                 </div>
-                <button className="w-full bg-green-700 text-white font-semibold rounded-md">
+                <button className="w-full bg-green-700 text-white font-semibold rounded-md py-2 transition hover:bg-green-800">
                     Pay Now
                 </button>
             </div>

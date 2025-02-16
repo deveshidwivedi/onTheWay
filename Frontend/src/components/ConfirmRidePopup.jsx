@@ -20,7 +20,7 @@ const ConfirmRidePopup = (props) => {
             </div>
 
             {/* Ride Details */}
-            <h3 className="text-lg font-semibold text-center mb-3">New Ride Available</h3>
+            <h3 className="text-lg font-semibold text-center mb-3">Confirm to Proceed</h3>
 
             <div className="space-y-2">
                 {/* Pickup & Drop-off */}
@@ -42,16 +42,20 @@ const ConfirmRidePopup = (props) => {
             {/* Buttons */}
             <div className="flex gap-2 mt-3">
                 <button
+                    onClick={() => props.setRidePopupPanel(false)}
                     className="flex-1 bg-green-700 text-white text-sm font-semibold rounded-md py-2 hover:bg-green-800">
                     Confirm
                 </button>
                 <button
-                    onClick={() => props.setRidePopupPanel(false)}
-                    className="flex-1 bg-gray-300 text-gray-700 text-sm font-semibold rounded-md py-2 hover:bg-gray-400">
+                    onClick={() => {
+                        props.setConfirmRidePopupPanel(false)
+                        props.setRidePopupPanel(false)
+                    }}
+                    className="flex-1 bg-red-600 text-white text-sm font-semibold rounded-md py-2 hover:bg-gray-400">
                     Cancel
                 </button>
             </div>
-        </div>
+        </div >
     )
 }
 

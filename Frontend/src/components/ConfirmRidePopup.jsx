@@ -1,5 +1,6 @@
 import React from "react";
 import customer from '../assets/customer.jpg';
+import { Link } from "react-router-dom";
 
 const ConfirmRidePopup = (props) => {
     return (
@@ -41,11 +42,10 @@ const ConfirmRidePopup = (props) => {
 
             {/* Buttons */}
             <div className="flex gap-2 mt-3">
-                <button
-                    onClick={() => props.setRidePopupPanel(false)}
+                <Link to='/captain-driving'
                     className="flex-1 bg-green-700 flex justify-center text-white text-sm font-semibold rounded-md py-2 hover:bg-green-800">
                     Confirm
-                </button>
+                </Link>
                 <button
                     onClick={() => {
                         props.setConfirmRidePopupPanel(false)

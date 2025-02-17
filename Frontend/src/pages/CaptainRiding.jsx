@@ -1,11 +1,50 @@
-import React from "react";
+import React, { useState, useRef } from 'react';
+import { Link } from "react-router-dom";
+import bg2 from "../assets/bg2.jpg";
+import car from "../assets/car.png";
+import logo from "../assets/logo.png";
+import driver from "../assets/driver.jpg";
+import CaptainDetails from '../components/CaptainDetails';
+import RidePopup from '../components/RidePopup';
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import ConfirmRidePopup from "../components/ConfirmRidePopup";
 
 const CaptainRiding = () => {
 
     return (
-        <div>
-            ok im tired now
-        </div>
+        <div className="h-screen ">
+            <div className='fixed p-2 top-0 flex items-center justify-between w-screen '>
+                <img className="w-35  -mt-12 self-start -mb-25" src={logo} alt="Logo" />
+                <Link to='/captain-home'
+                    className=" h-10 w-10  bg-white flex items-center justify-center rounded-full">
+                    <i className="text-lg font-medium ri-logout-box-r-line"></i>
+                </Link>
+            </div>
+            <div className="h-3/5"
+                style={{
+                    backgroundImage: `url(${bg2})`,
+                    backgroundSize: "190%",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                }}>
+            </div>
+            {/* Bottom Section */}
+            <div className="h-2/5 p-6 flex flex-col items-center justify-between bg-gradient-to-b from-yellow-400 to-yellow-500 rounded-t-3xl shadow-lg">
+                {/* Ride Distance Info */}
+                <div className="text-center">
+                    <h4 className="text-2xl font-bold text-gray-900">You're 3 KM Away</h4>
+                    <p className="text-sm text-gray-800 mt-1">Stay on route for a smooth ride</p>
+                </div>
+
+                {/* Complete Ride Button */}
+                <button className="w-10/12 bg-green-600 text-white font-semibold py-3 rounded-full text-lg shadow-md 
+        hover:bg-green-700 transition-transform transform hover:scale-105">
+                    Complete Ride
+                </button>
+            </div>
+
+        </div >
     )
 
 }

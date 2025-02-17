@@ -30,10 +30,15 @@ const CaptainRiding = () => {
                 }}>
             </div>
             {/* Bottom Section */}
-            <div className="h-2/5 p-6 flex flex-col items-center justify-between bg-gradient-to-b from-yellow-400 to-yellow-500 rounded-t-3xl shadow-lg">
+            <div className="h-2/5 p-6 flex flex-col items-center justify-between bg-gradient-to-b from-yellow-300 to-yellow-350 rounded-t-3xl shadow-lg">
+
+                <h5 className='p-1 relative text-center w-[93%] absolute top-0' onClick={() => {
+
+                }}><i className='text-3xl text-gray-500 ri-arrow-up-wide-line'></i></h5>
+
                 {/* Ride Distance Info */}
                 <div className="text-center">
-                    <h4 className="text-2xl font-bold text-gray-900">You're 3 KM Away</h4>
+                    <h4 className="text-2xl font-bold text-gray-900"> 3 KM away</h4>
                     <p className="text-sm text-gray-800 mt-1">Stay on route for a smooth ride</p>
                 </div>
 

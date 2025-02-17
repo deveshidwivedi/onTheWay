@@ -40,20 +40,26 @@ const ConfirmRidePopup = (props) => {
                 ))}
             </div>
 
+
             {/* Buttons */}
             <div className="flex gap-2 mt-3">
-                <Link to='/captain-driving'
-                    className="flex-1 bg-green-700 flex justify-center text-white text-sm font-semibold rounded-md py-2 hover:bg-green-800">
-                    Confirm
-                </Link>
-                <button
-                    onClick={() => {
-                        props.setConfirmRidePopupPanel(false)
-                        props.setRidePopupPanel(false)
-                    }}
-                    className="flex-1 bg-red-600 text-white text-sm font-semibold rounded-md py-2 hover:bg-gray-400">
-                    Cancel
-                </button>
+                <form onSubmit={(e) => {
+                    submitHandler(e)
+                }}>
+                    <input type="text" placeholder="Enter OTP" className='bg-[#eeeeee] px-12 py-2 text-base rounded-lg w-full mt-3' />
+                    <Link to='/captain-driving'
+                        className="flex-1 bg-green-700 flex justify-center text-white text-sm font-semibold rounded-md py-2 hover:bg-green-800">
+                        Confirm
+                    </Link>
+                    <button
+                        onClick={() => {
+                            props.setConfirmRidePopupPanel(false)
+                            props.setRidePopupPanel(false)
+                        }}
+                        className="flex-1 bg-red-600 text-white text-sm font-semibold rounded-md py-2 hover:bg-gray-400">
+                        Cancel
+                    </button>
+                </form>
             </div>
         </div >
     )

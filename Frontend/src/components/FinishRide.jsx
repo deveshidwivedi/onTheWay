@@ -17,11 +17,11 @@ const FinishRide = (props) => {
             <div className="flex flex-col items-center mt-2 mb-3">
                 <img className="h-12 w-12 rounded-full object-cover" src={customer} alt="customer" />
                 <h4 className="text-base font-medium mt-1">John Doe</h4>
-                <p className="text-xs text-gray-500">Finish this ride</p>
+
             </div>
 
             {/* Ride Details */}
-            <h3 className="text-lg font-semibold text-center mb-3">Confirm to Proceed</h3>
+            <h3 className="text-lg font-semibold text-center mb-3">Finish this Ride</h3>
 
             <div className="space-y-2">
                 {/* Pickup & Drop-off */}
@@ -41,18 +41,18 @@ const FinishRide = (props) => {
             </div>
 
 
-            <div className="flex gap-2 mt-3">
+            {/* Button and Text */}
+            <div className="flex flex-col items-center gap-4 mt-4">
+                <Link
+                    to="/captain-home"
+                    className="w-11/12 bg-green-700 text-white text-base font-semibold rounded-lg py-3 text-center transition-all duration-300 ease-in-out hover:bg-green-800 hover:shadow-lg active:scale-95 mx-auto block"
+                >
+                    Finish Ride
+                </Link>
 
-                <div className="flex gap-3 mt-3">
-                    <Link
-                        to="/captain-driving"
-                        className="w-1/2 bg-green-700 text-white text-sm font-semibold rounded-md py-2 text-center hover:bg-green-800"
-                    >
-                        Complete Ride
-                    </Link>
-
-                </div>
-
+                <p className="text-sm text-center text-gray-600 mt-2">
+                    Click 'Finish Ride' once the payment is complete.
+                </p>
             </div>
 
         </div >

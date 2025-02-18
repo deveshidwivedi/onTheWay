@@ -46,7 +46,9 @@ const CaptainRiding = () => {
                 }}>
             </div>
             {/* Bottom Section */}
-            <div className="h-2/5 p-6 flex flex-col items-center justify-between bg-gradient-to-b from-yellow-300 to-yellow-350 rounded-t-3xl shadow-lg">
+            <div className="h-2/5 p-6 flex flex-col items-center justify-between bg-gradient-to-b from-yellow-300 to-yellow-350 rounded-t-3xl shadow-lg"
+                onClick={() => setFinishRidePanel(true)}>
+
 
                 <h5 className='p-1 relative text-center w-[93%] absolute top-0' onClick={() => {
 

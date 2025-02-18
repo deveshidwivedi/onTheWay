@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import customer from '../assets/customer.jpg';
 import { Link } from "react-router-dom";
 
 const ConfirmRidePopup = (props) => {
+
+    const [otp, setOtp] = useState('');
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+    }
+
     return (
         <div className=" bg-white fixed bottom-0 left-0 right-0 shadow-lg p-3 rounded-t-lg">
             {/* Close Arrow */}
@@ -41,26 +48,36 @@ const ConfirmRidePopup = (props) => {
             </div>
 
 
-            {/* Buttons */}
             <div className="flex gap-2 mt-3">
-                <form onSubmit={(e) => {
-                    submitHandler(e)
-                }}>
-                    <input type="text" placeholder="Enter OTP" className='bg-[#eeeeee] px-12 py-2 text-base rounded-lg w-full mt-3' />
-                    <Link to='/captain-driving'
-                        className="flex-1 bg-green-700 flex justify-center text-white text-sm font-semibold rounded-md py-2 hover:bg-green-800">
-                        Confirm
-                    </Link>
-                    <button
-                        onClick={() => {
-                            props.setConfirmRidePopupPanel(false)
-                            props.setRidePopupPanel(false)
-                        }}
-                        className="flex-1 bg-red-600 text-white text-sm font-semibold rounded-md py-2 hover:bg-gray-400">
-                        Cancel
-                    </button>
+                <form onSubmit={(e) => submitHandler(e)} className="w-full">
+                    <input
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                        type="text"
+                        placeholder="Enter OTP"
+                        className="bg-[#eeeeee] px-4 py-2 text-base rounded-lg w-full mt-3"
+                    />
+                    <div className="flex gap-3 mt-3">
+                        <Link
+                            to="/captain-driving"
+                            className="w-1/2 bg-green-700 text-white text-sm font-semibold rounded-md py-2 text-center hover:bg-green-800"
+                        >
+                            Confirm
+                        </Link>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                props.setConfirmRidePopupPanel(false);
+                                props.setRidePopupPanel(false);
+                            }}
+                            className="w-1/2 bg-red-600 text-white text-sm font-semibold rounded-md py-2 text-center hover:bg-red-700"
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </form>
             </div>
+
         </div >
     )
 }

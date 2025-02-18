@@ -5,12 +5,28 @@ import car from "../assets/car.png";
 import logo from "../assets/logo.png";
 import driver from "../assets/driver.jpg";
 import CaptainDetails from '../components/CaptainDetails';
-import RidePopup from '../components/RidePopup';
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ConfirmRidePopup from "../components/ConfirmRidePopup";
+import FinishRide from '../components/FinishRide';
 
 const CaptainRiding = () => {
+
+    const [finishRidePanel, setFinishRidePanel] = useState(false);
+    const finishRidePanelRef = useRef(null);
+
+    useGSAP(() => {
+        if (finishRidePanel) {
+            gsap.to(finishRidePanelRef.current, { y: 0, duration: 0.3 });
+        } else {
+            gsap.to(finishRidePanelRef.current, {
+                y: "100vh",
+                duration: 1.2,
+                onComplete: () => setFinishRidePanel(null)
+            });
+        }
+    }, [finishRidePanel]);
+
 
     return (
         <div className="h-screen ">
@@ -48,6 +64,12 @@ const CaptainRiding = () => {
                     Complete Ride
                 </button>
             </div>
+
+
+            <div ref={finishRidePanelRef} className="fixed w-full z-10 translate-y-full bottom-0 px-3 py-10 pt-12">
+                <FinishRide setFinishRidePanel={setFinishRidePanel} />
+            </div>
+
 
         </div >
     )

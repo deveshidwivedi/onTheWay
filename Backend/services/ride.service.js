@@ -4,7 +4,7 @@ const mapService = require('./maps.service');
 
 async function getFare( pickup, destination){
 
-    if(!pickup || destination){
+    if(!pickup || !destination){
         throw new Error('Pickup and Destination are required');
     }
 
@@ -29,7 +29,7 @@ async function getFare( pickup, destination){
     };
 
 
-
+    console.log(distanceTime);
     const fare = {
         auto: Math.round(baseFare.auto + ((distanceTime.distance.value / 1000) * perKmRate.auto) + ((distanceTime.duration.value / 60) * perMinuteRate.auto)),
         car: Math.round(baseFare.car + ((distanceTime.distance.value / 1000) * perKmRate.car) + ((distanceTime.duration.value / 60) * perMinuteRate.car)),
@@ -48,13 +48,11 @@ module.exports.createRide = async ({
 
     const fare = await getFare(pickup, destination);
 
-
-
+    console.log(fare);  
     const ride = rideModel.create({
         user,
         pickup,
         destination,
-        otp: getOtp(6),
         fare: fare[ vehicleType ]
     })
 

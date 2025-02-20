@@ -4,6 +4,8 @@ import car from '../assets/car.png';
 import bike from '../assets/bike.png';
 import auto from '../assets/auto.png';
 const VehiclePanel = (props) => {
+    const fare = props.fare || { car: '', moto: '', auto: '' }; // Default values to avoid null/undefined errors
+
     return (
         <div>
             <h5 className='p-1 text-center w-[93%] absolute top-0  '
@@ -23,7 +25,7 @@ const VehiclePanel = (props) => {
                     <h5 className='font-medium text-sm'>2 mins away</h5>
                     <p className='font-medium text-xs text-gray-600'>Pocket-friendly rides</p>
                 </div>
-                <h2 className=' text-xl font-semibold'> ₹208.6</h2>
+                <h2 className=' text-xl font-semibold'> ₹{fare.car}</h2>
             </div>
             <div
                 onClick={() => {
@@ -36,7 +38,7 @@ const VehiclePanel = (props) => {
                     <h5 className='font-medium text-sm'>10 mins away</h5>
                     <p className='font-medium text-xs text-gray-600'>Zip through traffic</p>
                 </div>
-                <h2 className=' text-xl font-semibold'> ₹110.5</h2>
+                <h2 className=' text-xl font-semibold'>₹{fare.moto}</h2>
             </div>
             <div
                 onClick={() => {
@@ -49,7 +51,7 @@ const VehiclePanel = (props) => {
                     <h5 className='font-medium text-sm'>5 mins away</h5>
                     <p className='font-medium text-xs text-gray-600'>Hop in, ride cheap</p>
                 </div>
-                <h2 className=' text-xl font-semibold'> ₹156.2</h2>
+                <h2 className=' text-xl font-semibold'>₹{fare.auto}</h2>
             </div>
 
         </div>

@@ -29,6 +29,7 @@ const Home = () => {
     const [pickupSuggestions, setPickupSuggestions] = useState([]);
     const [destinationSuggestions, setDestinationSuggestions] = useState([]);
     const [activeField, setActiveField] = useState(null);
+    const [fare, setFare] = useState({ car: '', moto: '', auto: '' });
 
     const handlePickupChange = async (e) => {
         setPickup(e.target.value);
@@ -66,7 +67,6 @@ const Home = () => {
         } else if (activeField === 'destination') {
             setDestination(suggestion.description);
         }
-        // setPanelOpen(false);
     };
 
     const submitHandler = (e) => {
@@ -141,6 +141,22 @@ const Home = () => {
         }
     }, [waitingForDriver]);
 
+    async function findTrip() {
+        setVehiclePanelOpen(true);
+        setPanelOpen(false);
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/rides/get-fare`, {
+            params: { pickup, destination },
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+
+
+        console.log(response.data);
+        setFare(response.data);;
+
+    }
+
     return (
         <div className="min-h-screen w-full bg-cover bg-no-repeat bg-center flex flex-col items-center overflow-hidden"
             style={{ backgroundImage: `url(${bg22})` }}>
@@ -183,6 +199,13 @@ const Home = () => {
                             placeholder="Enter your destination"
                         />
                     </form>
+                    <button
+                        onClick={findTrip}
+                        className="bg-black  text-white font-semibold py-3 w-full rounded-lg shadow-md transition duration-300 mt-3">
+                        Find Trip
+                    </button>
+
+
                 </div>
                 <div ref={panelRef} className='bg-white'>
                     <LocationSearchPanel
@@ -192,7 +215,9 @@ const Home = () => {
                 </div>
             </div>
             <div ref={vehiclePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-14'>
-                <VehiclePanel setConfirmRidePanel={setConfirmRidePanel} setVehiclePanelOpen={setVehiclePanelOpen} />
+                <VehiclePanel setConfirmRidePanel={setConfirmRidePanel} setVehiclePanelOpen={setVehiclePanelOpen}
+                    fare={fare}
+                />
             </div>
             <div ref={confirmRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-14'>
                 <ConfirmRide setConfirmRidePanel={setConfirmRidePanel} setVehicleFound={setVehicleFound} />

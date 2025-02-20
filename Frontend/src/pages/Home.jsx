@@ -31,6 +31,8 @@ const Home = () => {
     const [activeField, setActiveField] = useState(null);
     const [fare, setFare] = useState({ car: '', moto: '', auto: '' });
 
+    const [vehicleType, setVehicleType] = useState(null);
+
     const handlePickupChange = async (e) => {
         setPickup(e.target.value);
         try {
@@ -157,6 +159,20 @@ const Home = () => {
 
     }
 
+    async function createRide() {
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/create`, {
+            pickup,
+            destination,
+            vehicleType
+        }, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+
+        console.log(response.data);
+    }
+
     return (
         <div className="min-h-screen w-full bg-cover bg-no-repeat bg-center flex flex-col items-center overflow-hidden"
             style={{ backgroundImage: `url(${bg22})` }}>
@@ -215,12 +231,20 @@ const Home = () => {
                 </div>
             </div>
             <div ref={vehiclePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-14'>
-                <VehiclePanel setConfirmRidePanel={setConfirmRidePanel} setVehiclePanelOpen={setVehiclePanelOpen}
+                <VehiclePanel
+                    selectVehicle={setVehicleType}
+                    setConfirmRidePanel={setConfirmRidePanel} setVehiclePanelOpen={setVehiclePanelOpen}
                     fare={fare}
                 />
             </div>
             <div ref={confirmRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-14'>
-                <ConfirmRide setConfirmRidePanel={setConfirmRidePanel} setVehicleFound={setVehicleFound} />
+                <ConfirmRide
+                    createRide={createRide}
+                    pickup={pickup}
+                    destination={destination}
+                    fare={fare}
+                    vehicleType={vehicleType}
+                    setConfirmRidePanel={setConfirmRidePanel} setVehicleFound={setVehicleFound} />
             </div>
             <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-14'>
                 <LookingForDriver setVehicleFound={setVehicleFound} />

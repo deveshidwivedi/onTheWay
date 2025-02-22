@@ -57,7 +57,7 @@ const captainSchema = new mongoose.Schema({
         enum: ['car', 'moto', 'auto'],
     },
     location:{
-        lat:{
+        ltd:{ //changed from lat to ltd
             type: Number,
         },
         lng: {

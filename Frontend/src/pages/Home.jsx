@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import axios from 'axios';
 import logo from "../assets/logo.png";
 import bg22 from "../assets/bg22.jpg";
@@ -10,6 +10,8 @@ import VehiclePanel from '../components/VehiclePanel';
 import ConfirmRide from '../components/ConfirmRide';
 import LookingForDriver from '../components/LookingForDriver';
 import WaitForDriver from '../components/WaitForDriver';
+import { SocketContext } from '../context/SocketContext';
+import { UserDataContext } from '../context/UserContext';
 
 const Home = () => {
     const [pickup, setPickup] = useState('');
@@ -32,6 +34,19 @@ const Home = () => {
     const [fare, setFare] = useState({ car: '', moto: '', auto: '' });
 
     const [vehicleType, setVehicleType] = useState(null);
+
+    const { sendMessage, receiveMessage, socket } = useContext(SocketContext);
+
+    const { user } = useContext(UserDataContext)
+
+    useEffect(() => {
+        console.log(user);
+        if (socket) {
+            socket.emit("join", { userType: "user", userId: user._id });
+        } else {
+            console.warn("Socket is not initialized yet");
+        }
+    }, [user, socket]);
 
     const handlePickupChange = async (e) => {
         setPickup(e.target.value);

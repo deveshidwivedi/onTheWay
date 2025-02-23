@@ -1,6 +1,7 @@
 const rideModel = require('../models/ride.model');
 const rideService = require('../services/ride.service');
 const { validationResult } = require('express-validator');
+const mapService = require('../services/maps.service');
 
 module.exports.createRide = async (req, res) => {
     const errors = validationResult(req);
@@ -11,17 +12,30 @@ module.exports.createRide = async (req, res) => {
     const { userId, pickup, destination, vehicleType } = req.body;
 
     try {
-        const ride = await rideService.createRide({ user: req.user._id, pickup, destination, vehicleType });
+        // Validate pickup coordinates first
+        const pickupCoordinates = await mapService.getAddressCoordinate(pickup);
+        if (!pickupCoordinates || isNaN(pickupCoordinates.ltd) || isNaN(pickupCoordinates.lng)) {
+            console.error("Invalid pickup coordinates:", pickupCoordinates);
+            return res.status(400).json({ message: "Invalid pickup coordinates" });
+        }
+        console.log(pickupCoordinates);
 
-        return res.status(201).json(ride);
+        const ride = await rideService.createRide({ 
+            user: req.user._id, 
+            pickup, 
+            destination, 
+            vehicleType 
+        });
+
+        res.status(201).json(ride); 
 
     } catch (err) {
-
-        console.log(err);
+        console.error(err);
         return res.status(500).json({ message: err.message });
     }
-
 };
+
+
 
 module.exports.getFare = async (req, res) => {
     const errors = validationResult(req);

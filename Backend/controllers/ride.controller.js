@@ -20,6 +20,14 @@ module.exports.createRide = async (req, res) => {
         }
         console.log(pickupCoordinates);
 
+        const captainsInRadius = await mapService.getCaptainsInTheRadius(pickupCoordinates.ltd, pickupCoordinates.lng, 2);
+        console.log("Captains in Radius:", captainsInRadius);
+
+        if (captainsInRadius.length === 0) {
+            console.warn("⚠ No captains found in radius!");
+        }
+
+
         const ride = await rideService.createRide({ 
             user: req.user._id, 
             pickup, 

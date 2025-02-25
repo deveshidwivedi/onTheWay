@@ -49,13 +49,14 @@ const captainSchema = new mongoose.Schema({
             type: Number,
             required: true,
             min:  [1, 'Capacity should be atleast 1'],
-        }
+        }, //under vehicle - was earlier separate
+        vehicleType: {
+            type: String, 
+            required: true,
+            enum: ['car', 'moto', 'auto'],
+        },
     },
-    vehicleType: {
-        type: String, 
-        required: true,
-        enum: ['car', 'moto', 'auto'],
-    },
+
     location:{
         ltd:{ 
             type: Number,

@@ -21,11 +21,12 @@ module.exports.createRide = async (req, res) => {
         console.log(pickupCoordinates);
 
         const captainsInRadius = await mapService.getCaptainsInTheRadius(pickupCoordinates.ltd, pickupCoordinates.lng, 2);
-        console.log("Captains in Radius:", captainsInRadius);
+console.log("Captains in Radius:", captainsInRadius);
+console.log("Pickup Coordinates:", pickupCoordinates.ltd, pickupCoordinates.lng);
 
-        if (captainsInRadius.length === 0) {
-            console.warn("⚠ No captains found in radius!");
-        }
+        // if (captainsInRadius.length === 0) {
+        //     console.warn("⚠ No captains found in radius!");
+        // }
 
 
         const ride = await rideService.createRide({ 

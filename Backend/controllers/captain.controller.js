@@ -18,17 +18,21 @@ module.exports.registerCaptain = async (req, res, next)=> {
         return res.status(400).json({ message: 'Captain already exists' });
     }
 
-    const hashedPassword = await captainModel.hashedPassword(password);
+    const hashedPassword = await captainModel.hashPassword(password);
 
     const captain = await captainService.createCaptain({
-        firstname: fullname.firstname,
-        lastname: fullname.lastname,
+        fullname: {
+            firstname: fullname.firstname,
+            lastname: fullname.lastname
+        },
         email,
         password: hashedPassword,
-        color: vehicle.color,
-        plate: vehicle.plate,
-        capacity: vehicle.capacity,
-        vehicleType: vehicle.vehicleType
+        vehicle: {
+            color: vehicle.color,
+            plate: vehicle.plate,
+            capacity: vehicle.capacity,
+            vehicleType: vehicle.vehicleType
+        }
     });
 
     const token = captain.generateAuthToken();
